@@ -15,7 +15,7 @@ resource "aws_instance" "centos8" {
 }
 
 resource "aws_vpc" "myvpc" {
-  cidr_block = "1o.0.0.0/16"
+  cidr_block = "10.0.0.0/16"
 }
 #create a VPC
 resource "aws_vpc" "myvpc"{
