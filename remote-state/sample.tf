@@ -1,90 +1,35 @@
-variable "sample" {
-  default = 10
+#step1 create a VPC
+resource "aws_vpc" "myvpc" {
+  cidr_block = "10.0.0.0/16"
+  tags = {
+    Name = "myterraformVPC"
+  }
 }
-
-output "sample" {
-  value = var.sample
+#step2 create a public subnet
+resource "aws_subnet" "public_subnet" {
+  vpc_id = aws_vpc.myvpc.id
+  cidr_block = "10.0.1.0/24"
 }
-
-#datatyppes
-#we have 3 types string data, booleandata, numberdata
-
-#string data type
-variable "sample1" {
-  default = "hi this is kiran"
+#step3 create a private subnet
+resource "aws_subnet" "private_subnet" {
+  vpc_id = aws_vpc.myvpc.id
+  cidr_block = "10.0.2.0/24"
 }
-
-#numberdatatype
-variable "sample2" {
-  default = 100
+#step4 create a IGW
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.myvpc.id
 }
-
-#booleandatatype
-variable "sample3" {
-  default = false
-}
-
-#list of variable type
-#1 default variable type
-#2 list variable type
-#3 mapping variable type
-
-variable "sample4" {
-  default = "hi kiran"
-}
-
-output "sample4" {
-  value = var.sample4
-}
-
-#list variable type
-variable "sample5" {
-  default = [
-    101,
-    "kiran",
-    "pravalika"
-  ]
-}
-
-output "sample5" {
-  value = var.sample5[2]
-}
-
-#mapping variable
-
-variable "sample6" {
-  default = {
-    number = 100
-    string = "kiran pravalika"
-    boolean = true
+#step5 create a route table for public subnet
+resource "aws_route_table" "publicRT" {
+  vpc_id = aws_vpc.myvpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "aws_internet_gateway.igw.id"
   }
 }
 
-output "sample6" {
-  value = var.sample6["number"]
-
-}
-
-#terraform.tfvar
-
-variable "demo1" {}
-output "demo1" {
-  value = var.demo1
-}
-variable "demo2"{
-  default = "hi 123"
-}
-
-output "demo2" {
-  value = var.demo2
-}
-
-
-
-terraform {
-  backend "s3" {
-    bucket = "kiranprav"
-    key    = "remote-state/terraform.tfstate"
-    region = "us-east-1"
-  }
+#step6 routbetable associateion with public subnet
+resource "aws_route_table_association" "publicRT_association" {
+    subnet_id = aws_subnet.public_subnet.id
+    route_table_id = aws_route_table.publicRT.id
 }
