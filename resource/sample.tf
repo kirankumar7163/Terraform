@@ -19,7 +19,7 @@ resource "aws_instance" "web" {
 }
 
 resource "aws_subnet" "my_subnet" {
-  vpc_id            = 'aws_vpc.04018a37c2a1f4629.id'
+  vpc_id            = aws_vpc.04018a37c2a1f4629.id
   cidr_block        = "172.31.0.0/16"
   availability_zone = "us-east-1a"
 
