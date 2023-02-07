@@ -21,7 +21,7 @@ variable "sample2" {
 
 #booleandatatype
 variable "sample3" {
-  default = fales
+  default = false
 }
 
 #list of variable type
