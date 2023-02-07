@@ -14,6 +14,20 @@ resource "aws_instance" "centos8" {
   }
 }
 
+
+resource "aws_vpc" "my_vpc" {
+  cidr_block = "172.31.0.0/16"
+  tags = {
+    Name = "testing"
+  }
+}
+
+resource "aws_subnet" "my_subnet" {
+  vpc_id            = aws_vpc.my_vpc.id
+  cidr_block        = "172.31.2.0/24"
+  availability_zone = "us-east-1c"
+}
+
 #create a VPC
 resource "aws_vpc" "myvpc"{
 cidr_block = "10.0.0.0/16"
