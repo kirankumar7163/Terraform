@@ -33,7 +33,7 @@ resource "aws_route_table" "publicRT" {
 }
 
 #step6 routbetable associateion with public subnet
-resource "aws_route_table_associaon" "publicRTassociation" {
+resource "aws_route_table_association" "publicRT_association" {
   subnet_id = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.publicRT.id
 }
