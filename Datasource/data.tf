@@ -4,6 +4,9 @@ data "aws_ami" "example" {
   owners      = ["973714476881"]
 }
 
+output "ami" {
+  valuve = data.aws_ami.example
+}
 
 data "aws_instance" "foo" {
   instance_id = "i-0bca86a8aaae7a742"
@@ -11,5 +14,5 @@ data "aws_instance" "foo" {
 }
 
 output "aws_instance" {
-  value = data.aws_instance.foo
+  value = data.aws_instance.foo.public_ip
 }
