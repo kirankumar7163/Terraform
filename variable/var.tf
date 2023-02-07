@@ -64,3 +64,10 @@ output "sample6" {
   value = var.sample6["number"]
 
 }
+
+#terraform.tfvar
+
+variable "demo1" {}
+  output "demo1" {
+    value = demo1
+  }
