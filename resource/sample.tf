@@ -6,7 +6,7 @@ data "aws_ami" "centos8" {
   name_regex  = "Centos-8-DevOps-Practice"
   owners      = ["973714476881"]
 }
-resource "aws_instance" "web" {
+resource "aws_instance" "centos8" {
   ami           = data.aws_ami.centos8.id
   instance_type = "t3.micro"
   tags = {
