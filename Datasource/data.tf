@@ -5,7 +5,7 @@ data "aws_ami" "example" {
 }
 
 output "aws_ami" {
-  valuve = data.aws_ami.example
+  value = data.aws_ami.example
 }
 
 data "aws_instance" "foo" {
