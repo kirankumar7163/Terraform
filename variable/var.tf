@@ -15,13 +15,11 @@ variable "sample1" {
 }
 
 #numberdatatype
-
 variable "sample2" {
   default = 100
 }
 
 #booleandatatype
-
 variable "sample3" {
   default = fales
 }
@@ -33,12 +31,10 @@ variable "sample3" {
 
 variable "sample4" {
   default = "hi kiran"
-
 }
 
 output "sample4" {
   value = var.sample4
-
 }
 
 #list variable type
