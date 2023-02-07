@@ -41,8 +41,8 @@ output "sample4" {
 variable "sample5" {
   default = [
     101,
-    kiran,
-    pravalika
+    "kiran",
+    "pravalika"
   ]
 }
 
