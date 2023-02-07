@@ -20,8 +20,7 @@ resource "aws_vpc" "myvpc" {
 #create a VPC
 resource "aws_vpc" "myvpc"{
 cidr_block = "10.0.0.0/16"
-availability_zone = "us-east-1a"
-tags = {
+  tags = {
 Name = "MyVPC"
 }
 }
