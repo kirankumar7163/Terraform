@@ -20,7 +20,7 @@ resource "aws_subnet" "private_subnet" {
 }
 
 #step4 create a IGW
-resource "aws_internet_gateway" "igw" {
+resource "aws_internet_gateway" "myigw" {
   vpc_id = aws_vpc.myvpc.id
 }
 #step5 create a route table for public subnet
@@ -28,7 +28,7 @@ resource "aws_route_table" "publicRT" {
   vpc_id = aws_vpc.myvpc.id
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "aws_internet_gateway.igw.id"
+    gateway_id = "aws_internet_gateway.myigw.id"
   }
 }
 
