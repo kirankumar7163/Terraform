@@ -71,3 +71,10 @@ variable "demo1" {}
 output "demo1" {
   value = var.demo1
   }
+variable "demo2"{
+  default = "hi 123"
+}
+
+output "demo2" {
+  value = var.demo2
+}
