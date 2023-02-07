@@ -4,7 +4,7 @@ data "aws_ami" "example" {
   owners      = ["973714476881"]
 }
 
-output "ami" {
+output "aws_ami" {
   valuve = data.aws_ami.example
 }
 
