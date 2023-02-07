@@ -68,6 +68,6 @@ output "sample6" {
 #terraform.tfvar
 
 variable "demo1" {}
-  output "demo1" {
-    value = demo1
+output "demo1" {
+  value = var.demo1
   }
