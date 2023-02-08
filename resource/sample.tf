@@ -53,7 +53,7 @@ resource "aws_route_table_association" "PublicRTAssociation"{
 }
 
 resource "aws_instance" "example" {
-  ami           = "ami-0c55b159cbfafe1f0"
+  ami           = "ami-0a017d8ceb274537d"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.PublicSubnet.id
 
