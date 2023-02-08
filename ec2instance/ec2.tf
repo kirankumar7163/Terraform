@@ -1,3 +1,6 @@
+
+
+
 resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/16"
 
@@ -31,9 +34,10 @@ resource "aws_instance" "foo" {
 
   network_interface {
     network_interface_id = aws_network_interface.foo.id
-    device_index         = 0
+    device_index         = 1
   }
   credit_specification {
     cpu_credits = "unlimited"
   }
 }
+
