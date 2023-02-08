@@ -18,7 +18,7 @@ resource "aws_subnet" "mypublic_subnet" {
 
 resource "aws_network_interface" "foo" {
   subnet_id   = aws_subnet.mypublic_subnet.id
-  private_ips = ["10.0.0.100"]
+  private_ips = ["10.0.1.0"]
 
   tags = {
     Name = "primary_network_interface"
