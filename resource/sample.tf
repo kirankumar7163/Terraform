@@ -1,19 +1,6 @@
 provider "aws" {
   region = "us-east-1"
 }
-data "aws_ami" "centos8" {
-  most_recent = true
-  name_regex  = "Centos-8-DevOps-Practice"
-  owners      = ["973714476881"]
-}
-resource "aws_instance" "web" {
-  ami           = data.aws_ami.centos8.id
-  instance_type = "t3.micro"
-
-  tags = {
-    Name = "testing"
-  }
-}
 
 
 #create a VPC
@@ -25,10 +12,14 @@ cidr_block = "10.0.0.0/16"
 }
 
 #2: Create a public subnet
-resource "aws_subnet" "PublicSubnet"{
-  vpc_id = aws_vpc.myvpc.id
-  availability_zone = "us-east-1a"
-  cidr_block = "10.0.1.0/24"
+resource "aws_subnet" "PublicSubnet" {
+  vpc_id                  = aws_vpc.myvpc.id
+  availability_zone       = "us-east-1a"
+  cidr_block              = "10.0.1.0/24"
+  map_public_ip_on_launch = true
+  tags                    = {
+    Name = "public_subnet"
+  }
 }
 
 #3 : create a private subnet
@@ -59,4 +50,11 @@ resource "aws_route_table" "PublicRT"{
 resource "aws_route_table_association" "PublicRTAssociation"{
   subnet_id = aws_subnet.PublicSubnet.id
   route_table_id = aws_route_table.PublicRT.id
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.PublicSubnet.id
+
 }
