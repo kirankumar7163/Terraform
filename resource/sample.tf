@@ -2,6 +2,11 @@ provider "aws" {
   region = "us-east-1"
 }
 
+data "aws_ami" "centos8" {
+  most_recent = true
+  name_regex  = "Centos-8-DevOps-Practice"
+  owners      = ["973714476881"]
+}
 
 #create a VPC
 resource "aws_vpc" "myvpc"{
@@ -53,7 +58,7 @@ resource "aws_route_table_association" "PublicRTAssociation"{
 }
 
 resource "aws_instance" "example" {
-  ami           = "ami-0a017d8ceb274537d"
+  ami           = data.aws_ami.centos8.id
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.PublicSubnet.id
 
