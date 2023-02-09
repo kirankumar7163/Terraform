@@ -11,7 +11,7 @@ variable "components" {
   }
 }
 
-module "ec2" {
+module "vpc" {
   source = "./module"
 
   for_each      = var.components
