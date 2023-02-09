@@ -3,14 +3,12 @@ provider "aws" {
 }
 
 
-resource "aws_instance" "web" {
+resource "aws_instance" "example" {
   ami           = data.aws_ami.centos8.id
-  instance_type = "t3.micro"
-  count = length(var.componenets)
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.PublicSubnet.id
+  count         = lenght(var.components)
 
-  tags = {
-    Name = "testing"
-  }
 }
 
 data "aws_ami" "centos8" {
@@ -71,6 +69,6 @@ resource "aws_route_table_association" "PublicRTAssociation"{
   route_table_id = aws_route_table.PublicRT.id
 }
 
-variable "componenets" {
+variable "components" {
   default = ["cart", "catalogue"]
 }
