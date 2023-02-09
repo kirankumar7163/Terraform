@@ -7,7 +7,7 @@ resource "aws_instance" "example" {
   ami           = data.aws_ami.centos8.id
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.PublicSubnet.id
-  count         = lenght(var.components)
+  count         = length(var.components)
 
 }
 
