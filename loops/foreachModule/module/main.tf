@@ -5,11 +5,11 @@ provider "aws" {
 
 resource "aws_instance" "example" {
   ami           = data.aws_ami.centos8.id
-  instance_type = each.value.instance_type
+  instance_type = var.instance_type
   subnet_id     = aws_subnet.PublicSubnet.id
 
   tags = {
-    Name = each.value["name"]
+    Name = var.name
   }
 
 }
