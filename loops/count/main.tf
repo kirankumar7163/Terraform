@@ -9,6 +9,10 @@ resource "aws_instance" "example" {
   subnet_id     = aws_subnet.PublicSubnet.id
   count         = length(var.components)
 
+  tags = {
+    Name = var.components[count.index]
+  }
+
 }
 
 data "aws_ami" "centos8" {
