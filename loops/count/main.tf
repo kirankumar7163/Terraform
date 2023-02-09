@@ -6,6 +6,7 @@ provider "aws" {
 resource "aws_instance" "web" {
   ami           = data.aws_ami.centos8.id
   instance_type = "t3.micro"
+  count = length(var.componenets)
 
   tags = {
     Name = "testing"
@@ -68,4 +69,8 @@ resource "aws_route_table" "PublicRT"{
 resource "aws_route_table_association" "PublicRTAssociation"{
   subnet_id = aws_subnet.PublicSubnet.id
   route_table_id = aws_route_table.PublicRT.id
+}
+
+variable "componenets" {
+  default = ["cart", "catalogue"]
 }
