@@ -2,7 +2,7 @@
 
 resource "aws_instance" "example" {
   ami           = data.aws_ami.centos8.id
-  instance_type = var.type == "null" ? "t3.micro" : var.type
+  instance_type = "${var.instance_type == "t2.micro" ? "t2.micro" : "t2.small"}"
   subnet_id     = aws_subnet.PublicSubnet.id
 
   tags = {
@@ -69,6 +69,7 @@ resource "aws_route_table_association" "PublicRTAssociation"{
   route_table_id = aws_route_table.PublicRT.id
 }
 
-variable "type" {
-  default = "null"
+variable "instance_type" {
+  type        = string
+  default     = "t2.micro"
 }
