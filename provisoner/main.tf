@@ -68,6 +68,7 @@ resource "aws_instance" "example" {
 }
 
 resource "null_resource" "provision" {
+
   provisioner = "remote-exec" {
     connection = {
       host = aws_instance.example.self.public.ip
