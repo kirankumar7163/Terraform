@@ -61,7 +61,7 @@ resource "aws_instance" "example" {
   ami           = data.aws_ami.centos8.id
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.PublicSubnet.id
-  vpc_security_group_ids = [aws_security_group.allow_tls.id]
+  security_group_id = [aws_security_group.allow_tls.id]
   tags = {
     Name = "centos-testing"
   }
@@ -69,19 +69,22 @@ resource "aws_instance" "example" {
 
 resource "null_resource" "provision" {
 
-provisioner = "remote-exec"{
-  connection = {
-    host = aws_instance.example.self.public.ip
-    user = centos8
-    password = DevOps321
+  triggers = {
+    instance_id = aws_instance.example.id
   }
-  inline = [
-    "false"
-  ]
-}
-}
 
+  provisioner "remote-exec" {
+    connection {
+      host     = aws_instance.example.public_ip
+      user     = "centos"
+      password = "DevOps321"
+    }
 
+    inline = [
+      "echo Helo"
+    ]
+  }
+}
 
 resource "aws_security_group" "allow_tls" {
   name        = "allow_tls"
