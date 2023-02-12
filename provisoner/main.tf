@@ -61,7 +61,7 @@ resource "aws_instance" "example" {
   ami           = data.aws_ami.centos8.id
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.PublicSubnet.id
-  security_group_id = [aws_security_group.allow_tls.id]
+  vpc_security_group_id = [aws_security_group.allow_tls.id]
   tags = {
     Name = "centos-testing"
   }
