@@ -65,6 +65,8 @@ resource "aws_instance" "example" {
   tags = {
     Name = "centos-testing"
   }
+}
+
   provisioner = "remote-exec" {
     connection = {
       host = self.public.ip
@@ -77,7 +79,6 @@ resource "aws_instance" "example" {
     ]
   }
 
-}
 
 
 resource "aws_security_group" "allow_tls" {
