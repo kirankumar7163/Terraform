@@ -69,17 +69,16 @@ resource "aws_instance" "example" {
 
 resource "null_resource" "provision" {
 
-  provisioner = "remote-exec" {
-    connection = {
-      host = aws_instance.example.self.public.ip
-      user = centos8
-      password = DevOps321
-    }
-    inline = [
-      "false"
-    ]
+provisioner = "remote-exec"{
+  connection = {
+    host = aws_instance.example.self.public.ip
+    user = centos8
+    password = DevOps321
   }
-
+  inline = [
+    "false"
+  ]
+}
 }
 
 
