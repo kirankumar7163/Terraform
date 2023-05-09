@@ -4,7 +4,7 @@
 
 terraform {
   backend "s3" {
-    bucket = "kiranprav"
+    bucket = "awsctrkiran"
     key    = "path/to/my/key"
     region = "us-east-1"
   }
